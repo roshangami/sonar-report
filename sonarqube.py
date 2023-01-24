@@ -17,10 +17,10 @@ def cmd_options():
 
 
 def get_sonar_issues(url, port, username, password):
-    data = requests.post(f"http://{url}:{port}/api/authentication/login?login={username}&password={password}")
+    data = requests.post(f"{url}:{port}/api/authentication/login?login={username}&password={password}")
     if data.status_code == 401:
         return "401 Unauthorized: Check credentials"
-    csv = requests.get(f"http://{url}:{port}/api/issues/search", cookies=data.cookies)
+    csv = requests.get(f"{url}:{port}/api/issues/search", cookies=data.cookies)
     issues = json.loads(csv.content.decode('utf-8'))
     json_object = json.dumps(issues, indent=4)
 
